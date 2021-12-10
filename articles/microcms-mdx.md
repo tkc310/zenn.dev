@@ -3,8 +3,9 @@ title: "microCMS Markdownをパース時にコンポーネントに変換する�
 emoji: "💁"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ['microCMS', 'JAMstack', 'Next.js', 'TypeScript']
-published: false
+published: true
 ---
+
 
 [microCMS Advent Calendar 2021](https://qiita.com/advent-calendar/2021/microcms) 12日目の記事です。
 
@@ -12,14 +13,13 @@ microCMSに投稿したマークダウン文章をNext.jsのSSGビルド時に�
 
 紹介する方法では投稿時の文章にコンポーネントを含む必要がないため `≒MDX` と表現しています。  
 
-```
-// MDX
+```ts
+// MDXの場合
 <CustomHeading as="h2">title</CustomHeading>
 <CustomLink href="https://google.com">link</CustomLink>
 
-// Markdown
-# hoge
-foo bar baz
+// Markdownの場合
+# title
 [link](https://google.com)
 ```
 
@@ -50,9 +50,7 @@ https://zenn.dev/tkc310/articles/792582ae9ad131
 
 ## 実装方法について
 
-ほぼ、next-mdx-remoteの使い方の解説になっていますが解説していきます。
-
-### next-mdx-remoteの使い方
+ほぼ、next-mdx-remoteの使い方の解説になってしまいます。
 
 [README example](https://github.com/hashicorp/next-mdx-remote#examples)に記載されている方法を利用します。  
 
@@ -95,7 +93,7 @@ export const getStaticProps: GetStaticProps<MDXRemoteSerializeResult> = async ()
 
 2,3について、詳しく説明していきます。
 
-#### mdx文章をhtmlに変換
+### mdx文章をhtmlに変換
 
 Next.jsの `getStaticProps` 関数でmicroCMSで投稿したマークダウン文章を取得して、htmlに変換します。  
 
@@ -111,10 +109,13 @@ const mdxSource = await mdx2html(article.body);
 
 変換する処理は `mdx2html` のように関数に切り出しています。  
 
-[オプション](https://github.com/hashicorp/next-mdx-remote#apis)として[mdx.js](https://mdxjs.com/docs/extending-mdx/) のAPIが利用できるため、  
+[オプション](https://github.com/hashicorp/next-mdx-remote)としてmdx.jsのAPIが利用できるため、  
 下記のプラグインも併用しています。
-- `rehypePrism` - コードのシンタックスハイライトを適用
-- `imageSize` - 画像のwidth, height属性を利用できるようにする
+
+- `rehypePrism` - コードのシンタックスハイライトを適用  
+- `imageSize` - 画像のwidth, height属性を利用できるようにする  
+
+https://mdxjs.com/docs/extending-mdx/
 
 ```ts
 // mex2html
@@ -142,7 +143,7 @@ export const mdx2html = async (
 export default mdx2html;
 ```
 
-#### 描画用のコンポーネントに渡す
+### 描画用のコンポーネントに渡す
 
 前述の `mdxSource` を `<MDXRemote>` に渡します。  
 
@@ -217,7 +218,7 @@ https://github.com/tkc310/microCMS_blog/blob/main/src/pages/articles/%5Bid%5D.ts
 ## 最後に
 
 今回の記事ではmicroCMSについてあまり触れませんでしたが、和製サービスでUIも分かりやすくオススメです。  
-個人ブログに利用していましたが、管理画面から登録したAPIスキーマをJSONとして出力・管理できるためチーム開発する際も便利だと思います。
+個人ブログに利用していますが、管理画面から登録したAPIスキーマをJSONとして出力・管理できるためチーム開発する際も便利だと思います。  
 
 アップデートも早くキャッチアップしきれていないため、本記事で紹介した内容もスマートに解決できる方法があるかもしれません。
 
