@@ -19,7 +19,7 @@ microCMSに投稿したマークダウン文章をNext.jsのSSGビルド時に�
 <CustomLink href="https://google.com">link</CustomLink>
 
 // Markdownの場合
-# title
+## title
 [link](https://google.com)
 ```
 
@@ -51,6 +51,8 @@ https://zenn.dev/tkc310/articles/792582ae9ad131
 ## 実装方法について
 
 ほぼ、next-mdx-remoteの使い方の解説になってしまいます。
+
+### 実装の概要
 
 [README example](https://github.com/hashicorp/next-mdx-remote#examples)に記載されている方法を利用します。  
 
