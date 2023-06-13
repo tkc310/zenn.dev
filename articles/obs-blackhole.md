@@ -3,7 +3,7 @@ title: "Gather.townの会議を収録(録画・録音)する for mac"
 emoji: "🐤"
 type: "idea" # tech: 技術記事 / idea: アイデア
 topics: ['gathertown', 'OBS', 'BlackHole']
-published: false
+published: true
 ---
 
 ## この記事について
@@ -132,5 +132,7 @@ classmethodさんの記事でも紹介されていますが、音声のノイズ
 収録開始後は `録画終了` というラベルに切り替わりますので、終了時にクリックします。
 
 なお、動画が処理されている間 `録画終了中...` というラベルが表示され、録画時間などによって長時間かかりますがこの間にクリックすると **動画が壊れる** ため注意が必要です。  
+
+なお、動画ファイルの作成先は初期値で `/Users/<PCアカウント名></PCアカウント名>/Movies/` です。
 
 ![OBS 収録](/images/obs-blackhole/obs_4.png)
