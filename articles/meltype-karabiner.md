@@ -3,7 +3,7 @@ title: "Google日本語入力とMeltypeをKarabiner-Elementsで切り替える"
 emoji: "👻"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["karabiner", "mac", "ime", "meltype", "googlejapaneseinput"]
-published: false
+published: true
 ---
 
 ## 3行サマリー
@@ -43,9 +43,10 @@ https://github.com/yksr-melt/Meltype/blob/main/docs/USAGE.md
 
 ## 入力ソースの ID を調べる
 
-`select_input_source` で切り替え先を指定するには、入力ソースの ID が必要です。Karabiner-EventViewer の Variables タブを開いた状態で入力ソースを切り替えると、現在の `input_source_id` が表示されます。
+`select_input_source` で切り替え先を指定するには、入力ソースの ID が必要です。
+Karabiner-EventViewer の Variables タブを開いた状態で入力ソースを切り替えると、現在の `input_source_id` が表示されるためこれを利用しました。
 
-筆者の環境での ID は次のとおりでした。
+私の環境での ID は次のとおりでした。
 
 | 入力ソース | input_source_id |
 | --- | --- |
@@ -64,38 +65,34 @@ Complex Modifications の「Add your own rule」に次の JSON を貼り付け�
     {
       "type": "basic",
       "from": { "key_code": "japanese_eisuu", "modifiers": { "mandatory": ["command"], "optional": ["caps_lock"] } },
-      "to": [{ "select_input_source": { "input_source_id": "^io\\.github\\.yksr-melt\\.inputmethod\\.Meltype\\.Japanese$" } }]
+      "to": [{ "select_input_source": { "input_source_id": "io.github.yksr-melt.inputmethod.Meltype.Japanese" } }]
     },
     {
       "type": "basic",
       "from": { "key_code": "japanese_eisuu", "modifiers": { "optional": ["caps_lock", "shift"] } },
-      "to": [{ "select_input_source": { "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.Roman$" } }]
+      "to": [{ "select_input_source": { "input_source_id": "com.google.inputmethod.Japanese.Roman" } }]
     },
     {
       "type": "basic",
       "from": { "key_code": "japanese_kana", "modifiers": { "optional": ["caps_lock", "shift"] } },
-      "to": [{ "select_input_source": { "input_source_id": "^com\\.google\\.inputmethod\\.Japanese\\.base$" } }]
+      "to": [{ "select_input_source": { "input_source_id": "com.google.inputmethod.Japanese.base" } }]
     }
   ]
 }
 ```
 
-Karabiner-Elements は manipulators を上から順に評価し、最初に一致したものを使います。cmd + 英数のルールを英数単体のルールより先に書いておくと、cmd を押しているときは Meltype が優先されます。
-
-`input_source_id` は正規表現として扱われるため、`.` をエスケープし、`^` と `$` で完全一致にしています。
+Karabiner-Elements は manipulators を上から順に評価し、最初に一致したものを使います。
+cmd + 英数のルールを英数単体のルールより先に書いておくと、cmd を押しているときは Meltype が優先されます。
 
 ## GUI を使わずに追加する
 
-次のコマンドを実行すると、`~/.config/karabiner/karabiner.json` の選択中のプロファイルに上のルールを追加します。Karabiner-Elements は設定ファイルの変更を検知して自動で読み込み直すので、アプリを開く必要はありません。
+前述のjsonをGUIからではなくコマンドで追加できるようにしました。
+
+次のコマンドを実行すると `~/.config/karabiner/karabiner.json` の選択中のプロファイルに上のルールを追加します。
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tkc310/settings/refs/heads/main/meltype/meltype-karabiner.sh | bash
 ```
-
-スクリプトは macOS 標準の `osascript`（JavaScript for Automation）で JSON を編集するので、jq は不要です。同じ description のルールがあれば置き換えるため、何度実行しても重複しません。実行前に `karabiner.json.bak` へバックアップを取ります。
-
-
-https://github.com/tkc310/settings/blob/main/meltype/meltype-karabiner.sh
 
 :::message
 スクリプトの中身が心配な場合は実行前に下記からコードを確認してください。
