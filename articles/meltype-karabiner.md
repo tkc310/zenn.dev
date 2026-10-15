@@ -11,7 +11,7 @@ published: true
 
 - 話題のMeltypeとGoogle日本語入力IMEを併用したかった
 - Karabiner-Elementsを利用してショートカットキーを設定した (JISキーボード)
-- ショートカットキーをコマンドで追加できるようにした
+- Meltype最高
 
 
 ## やりたいこと
@@ -24,7 +24,7 @@ https://x.com/yksr_melt/status/2107061826911703272
 https://news.yahoo.co.jp/articles/79b7238bb97fdbe54119cf34d77f652e284c36b1
 
 しかし、使い慣れていないだけだと思いますが、細かい変換などを制御したいケースで普段使っているGoogle日本語入力IMEと切り替えたいシーンが出てきました。
-そのため、下記のようにmacのJISキーボードでGoogle日本語入力とMeltypeを切り替えられるようにしました。
+ニーズとしてはニッチすぎると思いますが、下記のようにmacのJISキーボードでGoogle日本語入力とMeltypeを切り替えられるようにしました。
 
 | キー | 切り替え先 |
 | --- | --- |
@@ -33,7 +33,7 @@ https://news.yahoo.co.jp/articles/79b7238bb97fdbe54119cf34d77f652e284c36b1
 | cmd + 英数 | Meltype |
 
 なお、Meltype自体に入力中に細かく制御する方法はあるようです。
-https://github.com/yksr-melt/Meltype/blob/main/docs/USAGE.md
+[Meltype|USAGE.md](https://github.com/yksr-melt/Meltype/blob/main/docs/USAGE.md)
 
 
 ## 前提
