@@ -1,5 +1,5 @@
 ---
-title: "Google日本語入力とMeltypeをKarabiner-Elementsで切り替える"
+title: "MeltypeとGoogle日本語入力をショートカットキーで切り替える"
 emoji: "👻"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["karabiner", "mac", "ime", "meltype", "googlejapaneseinput"]
